@@ -1,0 +1,19 @@
+{
+    "name": "delroos/cms",
+    "authors": [{
+        "name": "DelRoos",
+        "email": "delanoroosvelt733@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src/Framework"
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpunit/phpunit": "^9.4"
+    },
+    "require": {
+        "symfony/http-foundation": "^5.1"
+    }
+}
