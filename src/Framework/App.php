@@ -3,16 +3,19 @@
 namespace Framework;
 
 use Exception;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class App
 {
     private $modules = [];
+    private $router; //the router with match a request
 
-    private $router;
-
+    /**
+     * load alls module
+     *
+     * @param array $modules table with content a module
+     */
     public function __construct(array $modules = [])
     {
         $this->router = new Router();
@@ -22,6 +25,12 @@ class App
         }
     }
 
+    /**
+     * Execute the request
+     *
+     * @param Request $request request if execute
+     * @return Response response of a request
+     */
     public function run(Request $request): Response
     {
         $uri = $request->getPathInfo();
@@ -48,6 +57,14 @@ class App
         }
     }
 
+
+    /**
+     * send parameters in request
+     *
+     * @param array $params list of params
+     * @param Request $request request with take a params
+     * @return Request request content params
+     */
     private function sendParamsInRequest(array $params, Request $request): Request
     {
         foreach ($params as $key => $value) {

@@ -20,7 +20,7 @@ class Route
     }
 
     /**
-     * @return string
+     * @return string name of the route
      */
     public function getName(): string
     {
@@ -28,7 +28,7 @@ class Route
     }
 
     /**
-     * @return callable
+     * @return callable function with call if route is load
      */
     public function getCallback(): callable
     {
