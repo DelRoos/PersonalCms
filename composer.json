@@ -6,7 +6,9 @@
     }],
     "autoload": {
         "psr-4": {
-            "Framework\\": "src/Framework"
+            "Framework\\": "src/Framework",
+            "App\\": "src",
+            "Test\\": "tests"
         }
     },
     "require-dev": {
@@ -14,6 +16,7 @@
         "phpunit/phpunit": "^9.4"
     },
     "require": {
-        "symfony/http-foundation": "^5.1"
+        "symfony/http-foundation": "^5.1",
+        "symfony/routing": "^5.1"
     }
 }
