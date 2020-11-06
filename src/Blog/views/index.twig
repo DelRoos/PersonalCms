@@ -1,0 +1,14 @@
+{% extends "layout.twig" %}
+
+{% block title %}Mon Blog{% endblock %}
+
+{% block body %}
+
+    <ul>
+        <li><a href="{{router.generateUri("blog.show", {slug: "delano-roosvelt"})}}">article 1</a></li>
+        <li><a href="">article 1</a></li>
+        <li><a href="">article 1</a></li>
+        <li><a href="">article 1</a></li>
+    </ul>
+
+{% endblock %}
