@@ -5,21 +5,24 @@ require "../vendor/autoload.php";
 use Framework\App;
 use Symfony\Component\HttpFoundation\Request;
 use App\Blog\BlogModule;
-use Framework\Renderer\PHPRenderer;
-use Framework\Renderer\TwigRenderer;
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
+use DI\ContainerBuilder;
 
-$renderer = new TwigRenderer(dirname(__DIR__)."/views");
-
-// $loader = new FilesystemLoader(dirname(__DIR__)."/views");
-// $twig = new Environment($loader, []);
-
-$app = new App([
+$modules = [
     BlogModule::class
-], [
-    "renderer" => $renderer
-]);
+];
+
+$builder = new ContainerBuilder();
+$builder->addDefinitions(dirname(__DIR__)."/config/config.php");
+
+foreach ($modules as $module) {
+    if ($module::DEFINITIONS) {
+        $builder->addDefinitions($module::DEFINITIONS);
+    }
+}
+
+$container = $builder->build();
+
+$app = new App($container, $modules);
 
 $response = $app->run(Request::createFromGlobals());
 $response->send();

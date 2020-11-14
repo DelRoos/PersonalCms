@@ -18,6 +18,8 @@
     "require": {
         "symfony/http-foundation": "^5.1",
         "symfony/routing": "^5.1",
-        "twig/twig": "^3.1"
+        "twig/twig": "^3.1",
+        "symfony/dependency-injection": "^5.1",
+        "php-di/php-di": "^6.3"
     }
 }
