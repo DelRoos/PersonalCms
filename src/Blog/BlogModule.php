@@ -2,34 +2,22 @@
 
 namespace App\Blog;
 
+use App\Blog\Action\BlogAction;
+use Framework\Module;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class BlogModule
+class BlogModule extends Module
 {
 
-    private $renderer;
+    const DEFINITIONS = __DIR__."/config.php";
 
-    public function __construct(Router $router, RendererInterface $renderer)
+    public function __construct(string $prefix, Router $router, RendererInterface $renderer)
     {
-        $this->renderer = $renderer;
-        $this->renderer->addPath("blog", __DIR__."/views");
+        $renderer->addPath("blog", __DIR__."/views");
 
-        $router->get("/blog", [$this, "index"], "blog.index");
-        $router->get("/blog/{slug<[a-z0-9\-]+>}", [$this, "show"], "blog.show");
-    }
-
-    public function index(Request $request): string
-    {
-        return $this->renderer->render("@blog/index");
-    }
-
-    public function show(Request $request): string
-    {
-        return $this->renderer->render("@blog/show", [
-                "slug" => $request->attributes->get("slug")
-            ]);
+        $router->get($prefix, BlogAction::class, "blog.index");
+        $router->get($prefix."/{slug<[a-z0-9\-]+>}", BlogAction::class, "blog.show");
     }
 }

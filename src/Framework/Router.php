@@ -22,7 +22,7 @@ class Router
         $this->router = new RouteCollection();
     }
 
-    public function get(string $path, callable $callback, string $name)
+    public function get(string $path, $callback, string $name)
     {
         $this->router->add($name, new RoutingRoute($path, ["callback" => $callback]));
     }
